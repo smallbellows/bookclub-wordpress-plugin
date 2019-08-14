@@ -1,0 +1,7 @@
+vendor
+**/css
+**/js
+**/partials
+public
+composer.json
+composer.lock
