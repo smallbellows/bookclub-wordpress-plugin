@@ -9,12 +9,12 @@ Bookclub plugin that creates a Book post type with custom fields and support for
 
 Books have title and description, plus author, book club date, and cover url fields. 
 
-## Installation ==
+## Installation
 
 This section describes how to install the plugin and get it working.
 
 1. Install dependent plugins:
-    1. [wpgraphql]("https://github.com/wp-graphql/wp-graphql", wpgraphql)
-    2. [advanced custom fields]("https://www.advancedcustomfields.com", advanced custom fields)
-2. Upload `peachpit-bookclub.php` to the `/wp-content/plugins/` directory
+    1. [wpgraphql](https://github.com/wp-graphql/wp-graphql)
+    2. [advanced custom fields](https://www.advancedcustomfields.com)
+2. Clone this repo and upload to the `/wp-content/plugins/` directory
 3. Activate the plugin through the 'Plugins' menu in WordPress
