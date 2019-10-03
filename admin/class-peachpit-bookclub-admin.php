@@ -140,6 +140,7 @@ class Peachpit_Bookclub_Admin {
 		$opts['labels']['search_items'] = esc_html__( "Search {$plural}", 'default' );
 		$opts['labels']['singular_name'] = esc_html__( $single, 'default' );
 		$opts['labels']['view_item'] = esc_html__( "View {$single}", 'default' );
+		$opts['taxonomies'] = array( 'category' );
 		register_post_type( strtolower( $cpt_name ), $opts );
 	} 
 
@@ -188,5 +189,38 @@ class Peachpit_Bookclub_Admin {
 			),
 			'position' => 'acf_after_title'
 		));
+	}
+
+	public static function add_pp_fields_to_graphql() {
+		$post_type = 'pp_book';
+		$post_type_object = get_post_type_object( $post_type );
+
+		register_graphql_field( $post_type_object->graphql_single_name, 'coverUrl', [
+			'type' => 'String',
+			'description' => __( 'The url of the book cover', 'wp-graphql' ),
+			'resolve' => function( $post ) {
+				$cover_url = get_post_meta( $post->ID, 'pp_cover_uri', true );
+				return $cover_url;
+			}
+		]);
+
+		register_graphql_field( $post_type_object->graphql_single_name, 'bookDate', [
+			'type' => 'String',
+			'description' => __( 'The date we had book club for this book', 'wp-graphql' ),
+			'resolve' => function( $post ) {
+				$date = get_post_meta( $post->ID, 'pp_book_date', true );
+				$book_club_date = new DateTime($date);
+				return $book_club_date->format('r');
+			}
+		]);
+
+		register_graphql_field( $post_type_object->graphql_single_name, 'bookAuthor', [
+			'type' => 'String',
+			'description' => __( 'Author of the book', 'wp-graphql' ),
+			'resolve' => function( $post ) {
+				$book_author = get_post_meta( $post->ID, 'pp_author', true );
+				return $book_author;
+			}
+		]);
 	}
 }
