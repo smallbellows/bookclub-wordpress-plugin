@@ -149,9 +149,8 @@ class Peachpit_Bookclub {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'new_cpt_pp_book' );
-		if( function_exists('acf_add_local_field_group') ):
-			$this->loader->add_action( 'acf/init', $plugin_admin, 'add_pp_book_custom_fields');
-		endif;
+		$this->loader->add_action( 'acf/init', $plugin_admin, 'add_pp_book_custom_fields' );
+		$this->loader->add_action( 'graphql_register_types', $plugin_admin, 'add_pp_fields_to_graphql' );
 	}
 
 	/**
